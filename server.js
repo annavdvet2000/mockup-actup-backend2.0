@@ -105,7 +105,7 @@ app.post('/webhook', async (req, res) => {
         });
 
         // Log the full API response for debugging
-        console.log('ChatGPT API response:', response.data);
+        console.log('ChatGPT API raw response:', JSON.stringify(response, null, 2));
 
         // Check if 'choices' exists and is not empty
         if (response && response.data && response.data.choices && response.data.choices.length > 0) {
@@ -124,7 +124,7 @@ app.post('/webhook', async (req, res) => {
         // Enhanced error logging for failed API requests
         if (error.response) {
             console.error('Error communicating with ChatGPT - Status Code:', error.response.status);
-            console.error('Error data:', error.response.data);
+            console.error('Error data:', JSON.stringify(error.response.data, null, 2));
         } else {
             console.error('Error communicating with ChatGPT:', error.message);
         }
