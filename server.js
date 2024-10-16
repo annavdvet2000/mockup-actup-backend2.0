@@ -92,6 +92,7 @@ app.post('/webhook', async (req, res) => {
         // Log the context created from relevant documents
         console.log('Generated context for ChatGPT:', context);
 
+        // Make the API request to OpenAI
         const response = await openai.chat.completions.create({
             model: 'gpt-4-turbo',
             messages: [
@@ -103,7 +104,7 @@ app.post('/webhook', async (req, res) => {
             temperature: 0.7,
         });
 
-        // Log the full response from the ChatGPT API
+        // Log the full API response for debugging
         console.log('ChatGPT API response:', response.data);
 
         // Check if 'choices' exists and is not empty
@@ -113,14 +114,20 @@ app.post('/webhook', async (req, res) => {
                 fulfillmentText: chatgptResponse
             });
         } else {
+            // Log if choices is missing or response is invalid
             console.error('No choices found in the ChatGPT API response:', response.data);
             res.status(500).json({
                 fulfillmentText: "Sorry, I couldn't understand the response from ChatGPT."
             });
         }
     } catch (error) {
-        // Log the error in case of failure
-        console.error('Error communicating with ChatGPT:', error.response ? error.response.data : error.message);
+        // Enhanced error logging for failed API requests
+        if (error.response) {
+            console.error('Error communicating with ChatGPT - Status Code:', error.response.status);
+            console.error('Error data:', error.response.data);
+        } else {
+            console.error('Error communicating with ChatGPT:', error.message);
+        }
         res.json({
             fulfillmentText: 'Sorry, something went wrong while processing your request.'
         });
