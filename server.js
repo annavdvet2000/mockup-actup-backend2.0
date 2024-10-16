@@ -108,14 +108,14 @@ app.post('/webhook', async (req, res) => {
         console.log('ChatGPT API raw response:', JSON.stringify(response, null, 2));
 
         // Check if 'choices' exists and is not empty
-        if (response && response.data && response.data.choices && response.data.choices.length > 0) {
-            const chatgptResponse = response.data.choices[0].message.content;
+        if (response && response.choices && response.choices.length > 0) {
+            const chatgptResponse = response.choices[0].message.content;
             res.json({
                 fulfillmentText: chatgptResponse
             });
         } else {
             // Log if choices is missing or response is invalid
-            console.error('No choices found in the ChatGPT API response:', response.data);
+            console.error('No choices found in the ChatGPT API response:', JSON.stringify(response, null, 2));
             res.status(500).json({
                 fulfillmentText: "Sorry, I couldn't understand the response from ChatGPT."
             });
@@ -148,15 +148,18 @@ app.post('/test-openai', async (req, res) => {
             temperature: 0.7,
         });
 
-        if (response && response.data && response.data.choices) {
-            const chatgptResponse = response.data.choices[0].message.content;
+        // Log the full API response for debugging
+        console.log('OpenAI API raw response:', JSON.stringify(response, null, 2));
+
+        if (response && response.choices && response.choices.length > 0) {
+            const chatgptResponse = response.choices[0].message.content;
             res.json({ response: chatgptResponse });
         } else {
-            console.error('Unexpected response format from OpenAI:', response.data);
+            console.error('Unexpected response format from OpenAI:', JSON.stringify(response, null, 2));
             res.json({ error: 'Unexpected response format' });
         }
     } catch (error) {
-        console.error('OpenAI Error:', error.response ? error.response.data : error.message);
+        console.error('OpenAI Error:', error.response ? JSON.stringify(error.response.data, null, 2) : error.message);
         res.status(500).json({ error: 'OpenAI API Error' });
     }
 });
