@@ -20,7 +20,12 @@ const { SessionsClient } = require('@google-cloud/dialogflow'); // Dialogflow se
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors()); // Enable CORS
+
+app.use(cors({
+    origin: ['http://localhost:10000', 'https://mockup-actup.netlify.app'],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 
 // Initialize OpenAI client using the API key
 const openai = new OpenAI({
