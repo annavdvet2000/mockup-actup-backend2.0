@@ -5,18 +5,6 @@ const OpenAI = require('openai');
 const fs = require('fs');
 const cors = require('cors');
 const similarity = require('compute-cosine-similarity');
-const path = require('path');
-
-// Decode and save the service account key
-const encodedKey = process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64;
-const serviceKeyPath = path.resolve(__dirname, 'service-account.json');
-fs.writeFileSync(serviceKeyPath, Buffer.from(encodedKey, 'base64').toString('utf-8'));
-
-// Point to the service key
-process.env.GOOGLE_APPLICATION_CREDENTIALS = serviceKeyPath;
-
-// Load the Google Cloud credentials for Dialogflow
-const { SessionsClient } = require('@google-cloud/dialogflow'); // Dialogflow sessions client
 
 const app = express();
 app.use(bodyParser.json());
@@ -27,12 +15,10 @@ app.use(cors({
     allowedHeaders: ['Content-Type']
 }));
 
-// Initialize OpenAI client using the API key
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Load metadata with transcripts and embeddings
 let data;
 try {
     data = JSON.parse(fs.readFileSync('./metadata_with_embeddings.json', 'utf-8'));
@@ -40,16 +26,14 @@ try {
     console.error('Error loading metadata:', error);
 }
 
-// Metadata endpoint
 app.get('/metadata', (req, res) => {
     if (data) {
-        res.json(data); // Sends the metadata
+        res.json(data);
     } else {
         res.status(500).json({ error: 'Metadata not available' });
     }
 });
 
-// Search endpoint
 app.post('/search', (req, res) => {
     const query = req.body.query.toLowerCase();
     const filteredInterviews = data.interviews.filter(interview =>
@@ -60,7 +44,6 @@ app.post('/search', (req, res) => {
     res.json({ interviews: filteredInterviews });
 });
 
-// Function to get embeddings for a given text
 async function getEmbedding(text) {
     const response = await openai.embeddings.create({
         model: 'text-embedding-ada-002',
@@ -69,35 +52,26 @@ async function getEmbedding(text) {
     return response.data[0].embedding;
 }
 
-// Function to find the most relevant documents based on a query
 async function findRelevantDocuments(query) {
     const queryEmbedding = await getEmbedding(query);
-    const results = data.interviews.map(doc => ({
-        ...doc,
-        similarity: similarity(queryEmbedding, doc.embedding),
-    }))
-    .sort((a, b) => b.similarity - a.similarity)
-    .slice(0, 3);
-    return results;
+    return data.interviews
+        .map(doc => ({
+            ...doc,
+            similarity: similarity(queryEmbedding, doc.embedding),
+        }))
+        .sort((a, b) => b.similarity - a.similarity)
+        .slice(0, 3);
 }
 
-// Dialogflow webhook endpoint
-app.post('/webhook', async (req, res) => {
-    const userQuery = req.body.queryResult.queryText;
-
-    // Log the incoming request for debugging
-    console.log('Received Dialogflow webhook request:', req.body);
-
+app.post('/chat', async (req, res) => {
+    const userQuery = req.body.message;
+    
     try {
         const relevantDocs = await findRelevantDocuments(userQuery);
-        const context = relevantDocs.map(doc =>
-            `Interview with ${doc.name}: ${doc.transcript.slice(0, 500)}...`
-        ).join("\n");
+        const context = relevantDocs
+            .map(doc => `Interview with ${doc.name}: ${doc.transcript.slice(0, 500)}...`)
+            .join("\n");
 
-        // Log the context created from relevant documents
-        console.log('Generated context for ChatGPT:', context);
-
-        // Make the API request to OpenAI
         const response = await openai.chat.completions.create({
             model: 'gpt-4-turbo',
             messages: [
@@ -109,68 +83,18 @@ app.post('/webhook', async (req, res) => {
             temperature: 0.7,
         });
 
-        // Log the full API response for debugging
-        console.log('ChatGPT API raw response:', JSON.stringify(response, null, 2));
-
-        // Check if 'choices' exists and is not empty
-        if (response && response.choices && response.choices.length > 0) {
-            const chatgptResponse = response.choices[0].message.content;
-            res.json({
-                fulfillmentText: chatgptResponse
-            });
+        if (response?.choices?.[0]?.message?.content) {
+            res.json({ response: response.choices[0].message.content });
         } else {
-            // Log if choices is missing or response is invalid
-            console.error('No choices found in the ChatGPT API response:', JSON.stringify(response, null, 2));
-            res.status(500).json({
-                fulfillmentText: "Sorry, I couldn't understand the response from ChatGPT."
-            });
+            res.status(500).json({ error: 'Invalid response format' });
         }
     } catch (error) {
-        // Enhanced error logging for failed API requests
-        if (error.response) {
-            console.error('Error communicating with ChatGPT - Status Code:', error.response.status);
-            console.error('Error data:', JSON.stringify(error.response.data, null, 2));
-        } else {
-            console.error('Error communicating with ChatGPT:', error.message);
-        }
-        res.json({
-            fulfillmentText: 'Sorry, something went wrong while processing your request.'
-        });
+        console.error('Chat Error:', error);
+        res.status(500).json({ error: 'Failed to process chat request' });
     }
 });
 
-// Test OpenAI API locally
-app.post('/test-openai', async (req, res) => {
-    const userQuery = req.body.query;
-    try {
-        const response = await openai.chat.completions.create({
-            model: 'gpt-4-turbo',
-            messages: [
-                { role: 'system', content: 'You are a helpful assistant.' },
-                { role: 'user', content: userQuery }
-            ],
-            max_tokens: 500,
-            temperature: 0.7,
-        });
-
-        // Log the full API response for debugging
-        console.log('OpenAI API raw response:', JSON.stringify(response, null, 2));
-
-        if (response && response.choices && response.choices.length > 0) {
-            const chatgptResponse = response.choices[0].message.content;
-            res.json({ response: chatgptResponse });
-        } else {
-            console.error('Unexpected response format from OpenAI:', JSON.stringify(response, null, 2));
-            res.json({ error: 'Unexpected response format' });
-        }
-    } catch (error) {
-        console.error('OpenAI Error:', error.response ? JSON.stringify(error.response.data, null, 2) : error.message);
-        res.status(500).json({ error: 'OpenAI API Error' });
-    }
-});
-
-// Start the server
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
