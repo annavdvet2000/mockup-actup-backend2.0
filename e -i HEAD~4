@@ -1,0 +1,185 @@
+[33mcommit f46f965e0d0baebf34f9ebedff32315f7edb895b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Anna van der Vet <annavdvet@hotmail.com>
+Date:   Mon Oct 21 16:05:56 2024 +0200
+
+    removed sensitive information
+
+[33mcommit 72b065bee03b1ec18e8fa14b9d4b7a1f91a93c51[m
+Author: Anna van der Vet <annavdvet@hotmail.com>
+Date:   Mon Oct 21 16:03:30 2024 +0200
+
+    Add logger.js
+
+[33mcommit 2a5c41f67faa7fbd1af65f3c82020cbde6d9f4b8[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Anna van der Vet <annavdvet@hotmail.com>
+Date:   Mon Oct 21 15:07:04 2024 +0200
+
+    Add sensitive files to .gitignore
+
+[33mcommit ce56422715cea0e0af0cddc09284a126c6b4eeec[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Mon Oct 21 14:41:01 2024 +0200
+
+    Create test
+
+[33mcommit c6cf395657243f9b2bc349f3e812e7038babf288[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Mon Oct 21 14:31:00 2024 +0200
+
+    Update server.js
+
+[33mcommit 913c58b09b280899d5385b23cf179a1bf1436968[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Sun Oct 20 19:12:01 2024 +0200
+
+    Update server.js
+
+[33mcommit cd9f4fad70aa149c2c15084c4f5a2eac524cb752[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Fri Oct 18 12:23:32 2024 +0200
+
+    Update server.js
+
+[33mcommit b1addc2ab11edd16c392fb059e926e0ab4408f61[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 22:46:42 2024 +0200
+
+    Update server.js
+
+[33mcommit 8cbab30b5bd9ca578c3311cad10645132f351b2e[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 22:46:14 2024 +0200
+
+    Update server.js
+
+[33mcommit 1e063d276a7865e7a1e559d3564cb7ca2398bced[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 22:45:49 2024 +0200
+
+    Update server.js
+
+[33mcommit 8fa4835d5610236b6459deec3b64f6e1799fe617[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 19:44:05 2024 +0200
+
+    Update server.js
+
+[33mcommit 33198ac8c095072f88fd25ed66fd41799142e7cf[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 15:09:35 2024 +0200
+
+    Update server.js
+
+[33mcommit 4d4bbf769a3908248029f760b049826106763d1b[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 14:05:24 2024 +0200
+
+    Update server.js
+
+[33mcommit ea135f995c4ba829e3b9d5ad234216c2b10a82da[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 13:55:30 2024 +0200
+
+    Add files via upload
+
+[33mcommit 921d254fcf0c950d9a123449e6721119c262be16[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 13:55:18 2024 +0200
+
+    Delete server.js
+
+[33mcommit 7f7d51dec7c85a43e396984a12d260927cb662de[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 13:37:15 2024 +0200
+
+    Add files via upload
+
+[33mcommit 4073afc5dc67ee2d82f58a757683cd4c71b2f133[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 13:36:59 2024 +0200
+
+    Delete server.js
+
+[33mcommit 8e359bcf88bfa4cb0d5aff90c341d5219a089a65[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 12:47:11 2024 +0200
+
+    Add files via upload
+
+[33mcommit 07a4388d00182b801feea6fe6a5fddf74c341601[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 12:46:46 2024 +0200
+
+    Delete package-lock.json
+
+[33mcommit 616ef3e359c2b9c6e3c110a45c932be996f772ec[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 12:46:39 2024 +0200
+
+    Delete package.json
+
+[33mcommit 870cef166dd4556f30e6a0699f8a234b977c3a5e[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 12:42:23 2024 +0200
+
+    Add files via upload
+
+[33mcommit c72ce06de563d63c5aa651204733f34006ea3bf5[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Wed Oct 16 12:42:08 2024 +0200
+
+    Delete server.js
+
+[33mcommit 2e320453655f1a7a4378edf34618ca52bc10fc2b[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Tue Oct 15 11:33:42 2024 +0200
+
+    Add files via upload
+
+[33mcommit a3ae1e2d8db910cdb7215309ccfad12cb7c30a5d[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Tue Oct 15 11:33:29 2024 +0200
+
+    Delete server.js
+
+[33mcommit 564cd27311e92ced75740b8404fecd3ad8719279[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Tue Oct 15 11:33:22 2024 +0200
+
+    Delete package.json
+
+[33mcommit 2de2621f3c3626abc37030cd14dac5d49aea5ac2[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Tue Oct 15 11:24:12 2024 +0200
+
+    Add files via upload
+
+[33mcommit e81cbf6e5ec4471556caabba5bf3f25f640bdf8e[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Tue Oct 15 11:23:58 2024 +0200
+
+    Delete server.js
+
+[33mcommit fccbbf85e9002d7919d34bdd38f93243a1382462[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Tue Oct 15 11:09:41 2024 +0200
+
+    Add files via upload
+
+[33mcommit ebe591ec11ea6fe5adf881af3712f94f4b75d28b[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Tue Oct 15 11:09:17 2024 +0200
+
+    Delete metadata.json
+
+[33mcommit 08a79aaa6a2fbc5c1a30d6dec54407c5d878c1fe[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Tue Oct 15 11:09:08 2024 +0200
+
+    Delete metadata_with_embeddings.json
+
+[33mcommit c4d687190aa043f34b6a594c73f268d5d554e673[m
+Author: annavdvet2000 <a.s.m.vandervet@students.uu.nl>
+Date:   Mon Oct 14 21:09:31 2024 +0200
+
+    Add files via upload
