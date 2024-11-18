@@ -9,8 +9,14 @@ const OpenAI = require('openai');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(cors());
+// Updated CORS configuration
+app.use(cors({
+    origin: ['https://mockup-actup.netlify.app', 'http://localhost:3000'],
+    methods: ['GET', 'POST'],
+    credentials: true,
+    optionsSuccessStatus: 200
+}));
+
 app.use(express.json());
 
 // OpenAI configuration
