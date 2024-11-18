@@ -99,7 +99,7 @@ app.post('/api/openai', async (req, res) => {
             .map(context => `From ${context.name}'s interview (${context.id}): ${context.text}`)
             .join('\n\n');
 
-        // Step 4: Call GPT-4 with the user message and interview context
+        // Step 4: Call GPT-4 with the user message and interview context, while respecting the token limit
         const completion = await openai.chat.completions.create({
             model: "gpt-4-turbo-preview",
             max_tokens: max_tokens,
@@ -107,7 +107,7 @@ app.post('/api/openai', async (req, res) => {
                 {
                     "role": "system",
                     "content": `You are a helpful assistant for the ACT UP Oral History Project. 
-                    Use the following interview context to answer questions:\n${contextString}`
+                    Provide a concise response within the given token limit, using the following interview context:\n${contextString}`
                 },
                 {
                     "role": "user",
@@ -116,30 +116,7 @@ app.post('/api/openai', async (req, res) => {
             ]
         });
 
-        // Step 5: Check if the response exceeds the token limit
-        if (completion.usage.total_tokens > max_tokens) {
-            // If the response exceeds the limit, generate a new, condensed response
-            const condensedResponse = await openai.chat.completions.create({
-                model: "gpt-4-turbo-preview",
-                max_tokens: max_tokens,
-                messages: [
-                    {
-                        "role": "system",
-                        "content": `You are a helpful assistant for the ACT UP Oral History Project. 
-                        Provide a concise, condensed response within the given token limit, using the following interview context:\n${contextString}`
-                    },
-                    {
-                        "role": "user",
-                        "content": message
-                    }
-                ]
-            });
-
-            // Use the condensed response
-            completion.choices[0].message.content = condensedResponse.choices[0].message.content;
-        }
-
-        // Step 6: Log the conversation
+        // Step 5: Log the conversation
         try {
             const chatLogs = JSON.parse(await fs.readFile(CHAT_LOGS_PATH, 'utf8') || '[]');
             chatLogs.push({
@@ -153,7 +130,7 @@ app.post('/api/openai', async (req, res) => {
             console.error('Error logging chat:', error);
         }
 
-        // Step 7: Send the response back to the frontend
+        // Step 6: Send the response back to the frontend
         res.json({ response: completion.choices[0].message.content });
     } catch (error) {
         console.error('Error processing request:', error);
