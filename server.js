@@ -102,6 +102,7 @@ app.post('/api/openai', async (req, res) => {
         // Step 4: Call GPT-4 with the user message and interview context
         const completion = await openai.chat.completions.create({
             model: "gpt-4-turbo-preview",
+            max_tokens: 50,
             messages: [
                 {
                     "role": "system",
