@@ -100,21 +100,32 @@ app.post('/api/openai', async (req, res) => {
             .join('\n\n');
 
         // Step 4: Call GPT-4 with the user message and interview context, while respecting the token limit
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4-turbo-preview",
-            max_tokens: max_tokens,
-            messages: [
-                {
-                    "role": "system",
-                    "content": `You are a helpful assistant for the ACT UP Oral History Project. 
-                    Provide a concise response within the given token limit, using the following interview context:\n${contextString}`
-                },
-                {
-                    "role": "user",
-                    "content": message
-                }
-            ]
-        });
+        let response = '';
+        let totalTokens = 0;
+        let retryCount = 0;
+        const maxRetries = 3;
+
+        while (totalTokens < max_tokens && retryCount < maxRetries) {
+            const completion = await openai.chat.completions.create({
+                model: "gpt-4-turbo-preview",
+                max_tokens: max_tokens - totalTokens,
+                messages: [
+                    {
+                        "role": "system",
+                        "content": `You are a helpful assistant for the ACT UP Oral History Project. 
+                        Provide a concise response within the given token limit, using the following interview context:\n${contextString}`
+                    },
+                    {
+                        "role": "user",
+                        "content": message
+                    }
+                ]
+            });
+
+            response += completion.choices[0].message.content;
+            totalTokens += completion.usage.total_tokens;
+            retryCount++;
+        }
 
         // Step 5: Log the conversation
         try {
@@ -123,7 +134,7 @@ app.post('/api/openai', async (req, res) => {
                 sessionId,
                 timestamp: new Date().toISOString(),
                 message,
-                response: completion.choices[0].message.content
+                response
             });
             await fs.writeFile(CHAT_LOGS_PATH, JSON.stringify(chatLogs, null, 2));
         } catch (error) {
@@ -131,7 +142,7 @@ app.post('/api/openai', async (req, res) => {
         }
 
         // Step 6: Send the response back to the frontend
-        res.json({ response: completion.choices[0].message.content });
+        res.json({ response });
     } catch (error) {
         console.error('Error processing request:', error);
         res.status(500).json({ 
