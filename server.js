@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
 // Unified OpenAI Endpoint
 app.post('/api/openai', async (req, res) => {
     try {
-        const { message, sessionId } = req.body;
+        const { message, sessionId, max_tokens } = req.body;
         console.log('Received message:', message); // Debug log
 
         // Step 1: Generate an embedding for the user's message
@@ -102,7 +102,7 @@ app.post('/api/openai', async (req, res) => {
         // Step 4: Call GPT-4 with the user message and interview context
         const completion = await openai.chat.completions.create({
             model: "gpt-4-turbo-preview",
-            max_tokens: 75,
+            max_tokens: max_tokens || 2048, // Default to 2048 if not provided
             messages: [
                 {
                     "role": "system",
