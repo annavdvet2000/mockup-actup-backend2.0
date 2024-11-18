@@ -73,27 +73,35 @@ function splitResponseIntoChunks(response, maxTokens) {
 app.post('/api/openai', async (req, res) => {
     try {
         const { message, sessionId, max_tokens } = req.body;
-
         const messageEmbeddingResponse = await openai.embeddings.create({
             model: "text-embedding-ada-002",
             input: message
         });
         const messageEmbedding = messageEmbeddingResponse.data[0].embedding;
 
-        const metadataWithEmbeddings = JSON.parse(await fs.readFile(METADATA_WITH_EMBEDDINGS_PATH, 'utf8'));
-
-        const relevantChunks = metadataWithEmbeddings.interviews.flatMap(interview => 
-            interview.chunks.map(chunk => ({
-                text: chunk.text,
-                similarity: calculateCosineSimilarity(messageEmbedding, chunk.embedding),
+        let metadataWithEmbeddings = JSON.parse(await fs.readFile(METADATA_WITH_EMBEDDINGS_PATH, 'utf8'));
+        
+        const relevantChunks = metadataWithEmbeddings.interviews.some(i => i.chunks) 
+            ? metadataWithEmbeddings.interviews.flatMap(interview => 
+                (interview.chunks || []).map(chunk => ({
+                    text: chunk.text,
+                    similarity: calculateCosineSimilarity(messageEmbedding, chunk.embedding),
+                    interviewName: interview.name,
+                    interviewId: interview.id
+                }))
+            )
+            : metadataWithEmbeddings.interviews.map(interview => ({
+                text: interview.transcript,
+                similarity: calculateCosineSimilarity(messageEmbedding, interview.embedding),
                 interviewName: interview.name,
                 interviewId: interview.id
-            }))
-        )
-        .sort((a, b) => b.similarity - a.similarity)
-        .slice(0, 3);
+            }));
 
-        const contextString = relevantChunks
+        const sortedChunks = relevantChunks
+            .sort((a, b) => b.similarity - a.similarity)
+            .slice(0, 3);
+
+        const contextString = sortedChunks
             .map(chunk => `From ${chunk.interviewName}'s interview (${chunk.interviewId}): ${chunk.text}`)
             .join('\n\n');
 
@@ -103,8 +111,7 @@ app.post('/api/openai', async (req, res) => {
             messages: [
                 {
                     "role": "system",
-                    "content": `You are a helpful assistant for the ACT UP Oral History Project. 
-                    Provide a concise response within the given token limit, using the following interview context:\n${contextString}`
+                    "content": `You are a helpful assistant for the ACT UP Oral History Project. Provide a concise response within the given token limit, using the following interview context:\n${contextString}`
                 },
                 {
                     "role": "user",
