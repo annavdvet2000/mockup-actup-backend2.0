@@ -116,24 +116,16 @@ app.post('/api/openai', async (req, res) => {
                 sessionId,
                 timestamp: new Date().toISOString(),
                 message,
-                response: completion.choices[0].message.content,
-                relevantInterviews: relevantInterviews.map(c => ({ id: c.id, name: c.name }))
+                response: completion.choices[0].message.content
             });
             await fs.writeFile(CHAT_LOGS_PATH, JSON.stringify(chatLogs, null, 2));
         } catch (error) {
             console.error('Error logging chat:', error);
-            // Continue even if logging fails
         }
 
         // Step 6: Send the response back to the frontend
         res.json({
-            response: completion.choices[0].message.content,
-            relevantInterviews: relevantInterviews.map(c => ({
-                id: c.id,
-                name: c.name,
-                tags: c.tags,
-                similarity: c.similarity
-            }))
+            response: completion.choices[0].message.content
         });
     } catch (error) {
         console.error('Error processing request:', error);
