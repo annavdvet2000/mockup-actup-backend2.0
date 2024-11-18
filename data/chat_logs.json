@@ -1,0 +1,302 @@
+[
+  {
+    "sessionId": "test-session-123",
+    "timestamp": "2024-10-21T16:37:39.140Z",
+    "message": "Hello, what is this website about?",
+    "type": "user"
+  },
+  {
+    "sessionId": "test-session-123",
+    "timestamp": "2024-10-21T16:37:46.787Z",
+    "message": "The ACT UP Oral History Project is a website and an initiative aimed at preserving the history of the AIDS Coalition to Unleash Power (ACT UP), a grassroots activist organization founded in New York City in 1987. This group was formed in response to the AIDS crisis, and it played a pivotal role in advocating for effective treatment, research, and policies to combat the epidemic. The Oral History Project specifically focuses on documenting the stories, strategies, and experiences of ACT UP members through in-depth video interviews. Its primary goal is to provide a comprehensive and accessible archive of the personal and collective actions undertaken by activists to fight AIDS, highlighting the movement's impact on the health, political, and social landscapes. This collection serves as an educational resource for researchers, activists, and the general public, ensuring that the achievements and lessons of the ACT UP movement are remembered and can inform future generations.",
+    "type": "assistant"
+  },
+  {
+    "sessionId": "session_123456",
+    "timestamp": "2024-10-21T19:05:21.539Z",
+    "message": "Tell me about HIV activism",
+    "response": "HIV activism, particularly from the late 1980s through the 1990s, was a critical response to the AIDS epidemic, which had a devastating impact on communities around the world. Activists played a crucial role in changing the course of the epidemic by demanding action, funding, and attention from governments and health organizations, which initially were slow to respond to the crisis.\n\nOne of the most notable organizations in the HIV/AIDS activism movement is the AIDS Coalition to Unleash Power (ACT UP), formed in New York City in 1987. ACT UP's activism is characterized by its direct action tactics, including demonstrations, sit-ins, and disruptions of governmental and scientific meetings to demand faster drug approval processes, more research funding, and better policies to combat HIV/AIDS.\n\nRobert Vazquez-Pacheco, in his interview (002), discusses his involvement with ACT UP's Majority Action committee. His work highlights efforts to promote safe sex practices and address the AIDS crisis within the Latina/o community, showcasing the intersection of racial and health justice issues within the broader struggle against HIV/AIDS.\n\nMoisés Agosto, in interview (003), talks about the founding and efforts of ACT UP Puerto Rico, which tackled the unique challenges faced by activists and the HIV/AIDS affected populations in Puerto Rico. His insights demonstrate how localization of HIV/AIDS activism is essential, as communities have different needs and face different obstacles, including dealing with stigma, discrimination, and disparities in healthcare access and quality.\n\nBoth interviews serve as individual narratives that, together, offer a glimpse into the multifaceted and global fight against HIV/AIDS. They underline the importance of community action, grassroots organizing, and the fight to ensure that marginalized communities had a voice in the larger discourse on health and policy. These efforts contributed to significant advances in HIV/AIDS treatment and prevention, as well as changes in public perception and policy.\n\nTo gain a broader understanding of HIV activism, it would also be informative to look into interviews from activists involved in different aspects of the movement, including those focused on legal advocacy, healthcare reform, drug development policies, and international activism. Each perspective adds to the collective history of a fight not solely against a virus but against the societal, political, and economic structures that exacerbated the crisis.",
+    "relevantInterviews": [
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      },
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      }
+    ]
+  },
+  {
+    "sessionId": "test-session-123",
+    "timestamp": "2024-10-21T20:24:48.649Z",
+    "message": "Hello, how does the ACT UP Oral History Project work?",
+    "response": "The ACT UP Oral History Project is a collection of interviews with surviving members of the AIDS Coalition to Unleash Power, New York. The goal of the project is to create a comprehensive archive that documents the history and the legacy of ACT UP, as well as the personal experiences of its members. This involves recording detailed interviews with activists who were involved in the movement, each sharing their unique perspectives and the roles they played in the fight against AIDS and for the rights of people affected by the epidemic.\n\nThese interviews are conducted to preserve the stories and the strategies of ACT UP, capturing the variety of experiences within the movement, especially as they relate to different communities and the various challenges they faced. The interviews are preserved, and often made accessible for educational purposes, historical research, and to inspire future activism.",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729542449116",
+    "timestamp": "2024-10-21T20:27:34.512Z",
+    "message": "hi",
+    "response": "Hello! How can I assist you today?",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729542449116",
+    "timestamp": "2024-10-21T20:28:00.376Z",
+    "message": "What is actup about?",
+    "response": "ACT UP, which stands for the AIDS Coalition to Unleash Power, is an international direct action advocacy group working to impact the lives of people with AIDS (PWAs) and the AIDS pandemic to bring about legislation, medical research and treatment, and policies to ultimately bring an end to the disease by mitigating loss of health and lives. ACT UP was formed in March 1987 at the Lesbian and Gay Community Services Center in New York City. The organization uses vocal public demonstrations and other actions to draw attention to the AIDS crisis, challenge government indifference, combat stigma, and promote safer sex and access to treatment. The group's activism has been credited with changing public health policy and accelerating the development and availability of AIDS medications.",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729542449116",
+    "timestamp": "2024-10-21T20:28:41.182Z",
+    "message": "What is the main message of this video excerpt of robert?",
+    "response": "Robert Vazquez-Pacheco's main message in his interview excerpt focuses on the importance of addressing HIV/AIDS within the Latina/o community through community specific strategies. He discusses his involvement with the Majority Action committee in ACT UP and his efforts to promote safe sex practices tailored to the cultural and social nuances of the Latina/o community. He highlights the significance of culturally sensitive activism and collaboration with other activists to effectively address the AIDS crisis.",
+    "relevantInterviews": [
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      },
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729542449116",
+    "timestamp": "2024-10-21T20:29:07.521Z",
+    "message": "what were his efforts to promote safe sex?",
+    "response": "In the interview, Robert Vazquez-Pacheco discusses his efforts to promote safe sex practices within the Latina/o community. Though specific tactics and strategies are not detailed in the brief summary provided, it can be inferred that his efforts would have involved educational outreach and awareness campaigns tailored to address the cultural and linguistic needs of the Latina/o community. Such initiatives typically focus on disseminating information about HIV prevention, condom use, and the importance of regular testing, often implemented through workshops, informational materials, and community events aimed at reducing stigma and encouraging open conversations about sexual health. Additionally, since he was involved in ACT UP and the Majority Action committee, his strategies likely included direct action and advocacy to improve access to healthcare services and support for marginalized communities.",
+    "relevantInterviews": [
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      },
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729542449116",
+    "timestamp": "2024-10-21T20:29:38.620Z",
+    "message": "on what are you basing this answer? The pdf?",
+    "response": "The answers provided are based on the given context about Robert Vazquez-Pacheco's and Moisés Agosto's interviews from the ACT UP Oral History Project summaries. These summaries outline the key topics and activities discussed by each individual during their interviews. They do not come from a PDF but from the specified details in the interview context provided.",
+    "relevantInterviews": [
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      },
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729542449116",
+    "timestamp": "2024-10-21T20:37:15.241Z",
+    "message": "Can you also give me the timestamp that robert talks about condoms specifically?",
+    "response": "I don't have the capability to provide specific timestamps from the interviews, as I can only provide summaries and general information based on the text. You would need to access the original interview materials to find specific details like timestamps. If you need information or insights from Robert Vazquez-Pacheco's discussion on safe sex practices and condom use, I can summarize what's available in my data!",
+    "relevantInterviews": [
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      },
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729610207416",
+    "timestamp": "2024-10-22T15:16:56.539Z",
+    "message": "hi",
+    "response": "Hello! How can I assist you today?",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729610207416",
+    "timestamp": "2024-10-22T15:17:16.117Z",
+    "message": "What is ACT UP about",
+    "response": "ACT UP, which stands for the AIDS Coalition to Unleash Power, is an international, grassroots political group that was founded in 1987 in New York City by a group of activists. The organization was formed in response to the AIDS crisis and the government's slow and inadequate response to the epidemic. ACT UP's primary aim is to bring about legislation, medical research, and treatment and policies to ultimately bring an end to the disease by mitigating loss of health and lives.\n\nACT UP is known for its direct action tactics, including demonstrations, sit-ins, and other forms of protest designed to draw attention to the urgency of the AIDS crisis and to hold government agencies, politicians, and pharmaceutical companies accountable. The movement has been instrumental in transforming the public health response to AIDS, making significant impacts on drug approvals, pricing, and research methodologies, along with broader social implications regarding LGBTQ+ rights and visibility.",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729610207416",
+    "timestamp": "2024-10-22T15:17:30.650Z",
+    "message": "Who is Moises Agosto",
+    "response": "Moisés Agosto is an activist who was involved with ACT UP, particularly focusing on the role and challenges of ACT UP Puerto Rico. In his interview, he discusses the impact of HIV/AIDS in Puerto Rico and the significant challenges faced by activists within the Latina/o community. Agosto highlights the importance of community action and grassroots organizing in addressing health disparities and improving conditions and awareness around HIV/AIDS. His work is a testament to the concerted efforts needed to mobilize and educate communities for better health outcomes.",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729671739248",
+    "timestamp": "2024-10-23T08:33:51.501Z",
+    "message": "hi",
+    "response": "Hello! How can I assist you today?",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729671739248",
+    "timestamp": "2024-10-23T08:34:05.611Z",
+    "message": "What is act up about?",
+    "response": "ACT UP (AIDS Coalition to Unleash Power) is an international, grassroots political group founded in 1987 in New York City. It was established in response to the devastating impact of the AIDS crisis during the late 1980s, particularly the government and societal indifference and inadequate response to the epidemic. ACT UP's main goal is to bring about legislation, medical research and treatment, and policies to ultimately bring an end to the disease by mitigating loss of health and lives. The organization operates through direct action, protests, demonstrations, and events meant to draw attention to the urgency of the AIDS crisis, advocating for better treatment and research, faster drug approval, and anti-discrimination practices.",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729671739248",
+    "timestamp": "2024-10-23T08:34:39.561Z",
+    "message": "Who is Robert Vazquez Pacheco",
+    "response": "Robert Vazquez-Pacheco is an activist who was involved with the ACT UP (AIDS Coalition to Unleash Power) organization. In the context of his interview for the ACT UP Oral History Project, he discusses his work with the Majority Action committee, which focuses on issues affecting people of color within the broader LGBT and HIV/AIDS activist movements. He highlights his efforts to promote safe sex practices within the Latina/o community and details his collaboration with fellow activists. His work is significant for addressing the intersection of race, ethnicity, and health advocacy, particularly in the context of the HIV/AIDS crisis.",
+    "relevantInterviews": [
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      },
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729784042831",
+    "timestamp": "2024-10-24T15:34:16.063Z",
+    "message": "hi",
+    "response": "Hello! How can I assist you today?",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729784042831",
+    "timestamp": "2024-10-24T15:34:34.937Z",
+    "message": "What is the actup movement?",
+    "response": "The ACT UP movement, which stands for the AIDS Coalition to Unleash Power, is an international, grassroots political group that was founded in 1987 in New York City by Larry Kramer and a group of activists. The primary aim of ACT UP has been to bring attention to the AIDS crisis, advocate for increased research and funding, and ensure access to treatment for people with AIDS, especially at a time when the government's response to the epidemic was seen as severely inadequate.\n\nACT UP is known for its direct, often confrontational action, creative visibility in protests, and the famous slogan \"Silence = Death.\" Its members have staged numerous demonstrations, die-ins, and other forms of protest to force governments, pharmaceutical companies, and health institutions to take urgent and effective action against the spread of HIV/AIDS and to improve the lives of people affected by the disease.\n\nThe movement has played a crucial role in bringing about significant changes in health policies, reducing the prices of medication, and increasing public awareness and understanding of HIV/AIDS.",
+    "relevantInterviews": [
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      },
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729784042831",
+    "timestamp": "2024-10-24T15:35:35.445Z",
+    "message": "Tell me a joke",
+    "response": "Why don't skeletons fight each other?\n\nThey don't have the guts! 😄",
+    "relevantInterviews": [
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      },
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      }
+    ]
+  },
+  {
+    "sessionId": "session_1729784042831",
+    "timestamp": "2024-10-24T15:36:40.046Z",
+    "message": "What can you tell me about Josephine Hilberink",
+    "response": "The information provided does not include any details about Josephine Hilberink. The context shared revolves around Robert Vazquez-Pacheco and Moisés Agosto discussing their experiences and roles within ACT UP and related activities in the Latina/o community and Puerto Rico. If you have more specific questions related to the topics mentioned or other individuals involved in ACT UP, feel free to ask!",
+    "relevantInterviews": [
+      {
+        "id": "002",
+        "name": "Robert Vazquez-Pacheco"
+      },
+      {
+        "id": "003",
+        "name": "Moisés Agosto"
+      }
+    ]
+  }
+]
