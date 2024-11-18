@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 const fs = require('fs').promises;
 const path = require('path');
 const pdf = require('pdf-parse');
