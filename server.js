@@ -56,6 +56,28 @@ app.get('/', (req, res) => {
     res.json({ message: "Server is running" });
 });
 
+// Helper function to split the response into chunks
+function splitResponseIntoChunks(response, maxTokens) {
+    const words = response.split(' ');
+    const chunks = [];
+    let currentChunk = '';
+
+    for (const word of words) {
+        if (currentChunk.length + word.length + 1 <= maxTokens) {
+            currentChunk += ' ' + word;
+        } else {
+            chunks.push(currentChunk.trim());
+            currentChunk = word;
+        }
+    }
+
+    if (currentChunk.trim().length > 0) {
+        chunks.push(currentChunk.trim());
+    }
+
+    return chunks;
+}
+
 // Unified OpenAI Endpoint
 app.post('/api/openai', async (req, res) => {
     try {
@@ -99,50 +121,42 @@ app.post('/api/openai', async (req, res) => {
             .map(context => `From ${context.name}'s interview (${context.id}): ${context.text}`)
             .join('\n\n');
 
-        // Step 4: Call GPT-4 with the user message and interview context, while respecting the token limit
-        let response = '';
-        let totalTokens = 0;
-        let retryCount = 0;
-        const maxRetries = 3;
+        // Step 4: Call GPT-4 with the user message and interview context
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4-turbo-preview",
+            max_tokens: 2048,
+            messages: [
+                {
+                    "role": "system",
+                    "content": `You are a helpful assistant for the ACT UP Oral History Project. 
+                    Provide a concise response within the given token limit, using the following interview context:\n${contextString}`
+                },
+                {
+                    "role": "user",
+                    "content": message
+                }
+            ]
+        });
 
-        while (totalTokens < max_tokens && retryCount < maxRetries) {
-            const completion = await openai.chat.completions.create({
-                model: "gpt-4-turbo-preview",
-                max_tokens: max_tokens - totalTokens,
-                messages: [
-                    {
-                        "role": "system",
-                        "content": `You are a helpful assistant for the ACT UP Oral History Project. 
-                        Provide a concise response within the given token limit, using the following interview context:\n${contextString}`
-                    },
-                    {
-                        "role": "user",
-                        "content": message
-                    }
-                ]
-            });
+        // Step 5: Split the response into chunks if it exceeds the token limit
+        const responseChunks = splitResponseIntoChunks(completion.choices[0].message.content, max_tokens);
 
-            response += completion.choices[0].message.content;
-            totalTokens += completion.usage.total_tokens;
-            retryCount++;
-        }
-
-        // Step 5: Log the conversation
+        // Step 6: Log the conversation
         try {
             const chatLogs = JSON.parse(await fs.readFile(CHAT_LOGS_PATH, 'utf8') || '[]');
             chatLogs.push({
                 sessionId,
                 timestamp: new Date().toISOString(),
                 message,
-                response
+                response: responseChunks.join(' ')
             });
             await fs.writeFile(CHAT_LOGS_PATH, JSON.stringify(chatLogs, null, 2));
         } catch (error) {
             console.error('Error logging chat:', error);
         }
 
-        // Step 6: Send the response back to the frontend
-        res.json({ response });
+        // Step 7: Send the response back to the frontend
+        res.json({ response: responseChunks.join(' ') });
     } catch (error) {
         console.error('Error processing request:', error);
         res.status(500).json({ 
