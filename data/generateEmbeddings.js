@@ -1,46 +1,89 @@
 require('dotenv').config();
-const fs = require('fs');
+const fs = require('fs').promises;
+const path = require('path');
+const pdf = require('pdf-parse');
 const OpenAI = require('openai');
 
-// Initialize OpenAI client using the API key
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY
 });
 
-// Load the interview data from metadata.json
-const data = JSON.parse(fs.readFileSync('./metadata.json', 'utf-8'));
+async function readPDF(pdfPath) {
+    const dataBuffer = await fs.readFile(pdfPath);
+    const data = await pdf(dataBuffer);
+    return data.text;
+}
 
-// Function to generate embeddings for each interview transcript
-async function generateEmbeddings() {
-    try {
-        // Iterate over each interview in the data
-        for (const interview of data.interviews) {
-            console.log(`Generating embedding for interview ID: ${interview.id}`);
-            
-            // Get the text content to generate an embedding from
-            const text = interview.transcript;
-            if (!text || text.trim() === "") {
-                console.error(`No transcript found for interview ID: ${interview.id}`);
-                continue; // Skip this interview if there's no text to process
-            }
+function chunkText(text, maxChunkSize = 1000) {
+    const sentences = text.split(/[.!?]+\s/);
+    const chunks = [];
+    let currentChunk = '';
 
-            // Generate the embedding using OpenAI's API
+    for (const sentence of sentences) {
+        if ((currentChunk + sentence).length > maxChunkSize) {
+            if (currentChunk) chunks.push(currentChunk.trim());
+            currentChunk = sentence;
+        } else {
+            currentChunk += ' ' + sentence;
+        }
+    }
+    if (currentChunk) chunks.push(currentChunk.trim());
+    return chunks;
+}
+
+async function generateEmbeddings(chunks) {
+    const embeddings = [];
+    for (const chunk of chunks) {
+        try {
             const response = await openai.embeddings.create({
-                model: 'text-embedding-ada-002',
-                input: text, // Ensure 'input' is provided with the text
+                model: "text-embedding-ada-002",
+                input: chunk
             });
+            embeddings.push({
+                text: chunk,
+                embedding: response.data[0].embedding
+            });
+        } catch (error) {
+            console.error('Error generating embedding:', error);
+        }
+    }
+    return embeddings;
+}
 
-            // Store the embedding in the interview object
-            interview.embedding = response.data[0].embedding;
+async function main() {
+    try {
+        const metadata = JSON.parse(await fs.readFile('./metadata.json', 'utf8'));
+        const updatedInterviews = [];
+
+        for (const interview of metadata.interviews) {
+            console.log(`Processing interview ${interview.id}`);
+            
+            const pdfPath = path.join(__dirname, interview.transcript_pdf);
+            
+            try {
+                const fullText = await readPDF(pdfPath);
+                const chunks = chunkText(fullText);
+                const chunkEmbeddings = await generateEmbeddings(chunks);
+                
+                updatedInterviews.push({
+                    ...interview,
+                    chunks: chunkEmbeddings
+                });
+                
+            } catch (error) {
+                console.error(`Error processing PDF for interview ${interview.id}:`, error);
+            }
         }
 
-        // Write updated data with embeddings back to a new JSON file
-        fs.writeFileSync('./metadata_with_embeddings.json', JSON.stringify(data, null, 2));
-        console.log('Embeddings generated and saved to metadata_with_embeddings.json.');
+        await fs.writeFile(
+            './metadata_with_embeddings.json', 
+            JSON.stringify({ interviews: updatedInterviews }, null, 2)
+        );
+
+        console.log('Processing complete');
     } catch (error) {
-        console.error('Error generating embeddings:', error);
+        console.error('Error in main process:', error);
     }
 }
 
-// Run the embedding generation
-generateEmbeddings();
+main();
