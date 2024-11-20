@@ -45,8 +45,16 @@ function calculateCosineSimilarity(vecA, vecB) {
     return dotProduct / (magnitudeA * magnitudeB);
 }
 
-app.get('/', (req, res) => {
-    res.json({ message: "Server is running" });
+app.get('/api/chat-history', async (req, res) => {
+    try {
+        const sessionId = req.query.sessionId;
+        const chatLogs = JSON.parse(await fs.readFile(CHAT_LOGS_PATH, 'utf8'));
+        const sessionLogs = chatLogs.filter(log => log.sessionId === sessionId);
+        res.json(sessionLogs);
+    } catch (error) {
+        console.error('Error retrieving chat history:', error);
+        res.status(500).json({ error: 'Failed to retrieve chat history' });
+    }
 });
 
 function splitResponseIntoChunks(response, maxTokens) {
